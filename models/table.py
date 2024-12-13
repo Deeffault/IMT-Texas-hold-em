@@ -69,11 +69,19 @@ class Table:
             players (list): A list of Player objects.
 
         Returns:
-            bool: True if the game should end, False otherwise.
+            bool: True if the round should end, False otherwise.
         """
         active_players = [player for player in players if player.active]
-        if len(active_players) <= 1:
-            return True  # End the game if only one player is active
+        if len(active_players) == 0:
+            print("All players have folded or been eliminated. No winner for this round.")
+            return True  # End the round
+        
+        if len(active_players) == 1:
+            winner = active_players[0]
+            print(f"{winner.name} wins the round as the last active player!")
+            winner.chips += self.blind
+            self.blind = 0
+            return True  # End the round
 
         for player in active_players:
             if player.is_eliminated():
@@ -85,11 +93,18 @@ class Table:
                 action = input(f"{player.name}, enter your action (bet/fold): ").strip().lower()
                 if action == "fold":
                     player.fold()
+                    active_players = [p for p in players if p.active]
+                    if len(active_players) == 1:
+                        winner = active_players[0]
+                        print(f"{winner.name} wins the round as the last active player!")
+                        winner.chips += self.blind
+                        self.blind = 0
+                        return True  # End the round
                     break
                 elif action == "bet":
                     try:
                         bet_amount = int(input(f"Enter your bet amount (current chips: {player.chips}): "))
-                        player.bet(bet_amount)
+                        player.bet(bet_amount, self)
                         break
                     except ValueError as e:
                         print(f"Invalid bet: {e}")
@@ -97,3 +112,31 @@ class Table:
                     print("Invalid action. Please enter 'bet' or 'fold'.")
 
         return False  # Continue the game
+
+
+    
+    def update_blind(self, amount):
+        """
+        Updates the blind with given amount.
+
+        Args:
+            amount (int): The amount to add to the blind.
+        """
+        self.blind += amount
+        
+    def check_winner(self, players):
+        """
+        Check if there is only one player left with chips or if everyone is all-in.
+        """
+        active_players = [player for player in players if player.chips > 0]
+        
+        # Si un seul joueur a des jetons, il gagne la partie
+        if len(active_players) == 1:
+            return active_players[0]
+        
+        # Si tous les joueurs sont all-in, le jeu doit continuer jusqu'au showdown
+        if all(player.chips == 0 for player in players):
+            print("All players are all-in. Proceeding to final evaluation.")
+            return None  # Pas encore de gagnant, évaluation finale nécessaire
+        
+        return None

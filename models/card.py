@@ -1,5 +1,3 @@
-import random
-
 class Card:
     """
     Represents a playing card with a value and suit.

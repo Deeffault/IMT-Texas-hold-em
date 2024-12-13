@@ -47,13 +47,15 @@ This project is a Python-based implementation of the popular card game **Texas H
 ```
 Texas-Holdem-Poker/
 │
-├── texas_holdem.py        # Main game logic
+├── main.py                # Main game logic
 ├── models/
 │   ├── card.py            # Card and deck implementation
 │   ├── player.py          # Player class
 │   ├── table.py           # Table and game management
+│   ├── __init__.py
 ├── utils/
-│   ├── hand_evaluation.py # Hand ranking and evaluation
+│   ├── display.py
+│   ├── constants.py
 │
 ├── README.md              # Project documentation
 └── requirements.txt       # List of dependencies
