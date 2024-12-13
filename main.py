@@ -3,7 +3,7 @@ import time
 import logging
 
 from models import Table, Player
-from utils.display import display_table, display_card
+from utils import display_card, display_table
 from treys import Evaluator, Card
 from colorama import Fore, Style, init
 

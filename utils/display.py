@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from utils.constants import SUIT_SYMBOLS
+from utils import SUIT_SYMBOLS
 
 def display_card(cards):
     """

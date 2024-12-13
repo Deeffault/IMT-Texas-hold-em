@@ -1,4 +1,4 @@
-from utils.display import display_card
+from utils import display_card
 
 class Player:
     """
@@ -35,8 +35,11 @@ class Player:
             raise ValueError("Insufficient amount of chips")
         if amount <= 0:
             raise ValueError("Bet amount must be positive")
+        if amount < table.current_bet:
+            raise ValueError(f"Bet amount must be at least {table.current_bet} to match the current bet")
         self.chips -= amount
         table.update_blind(amount)
+        table.current_bet = amount
         return amount
 
     def fold(self):

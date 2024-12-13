@@ -1,13 +1,3 @@
-# IMT-Texas-hold-em
-
-pip --version
-
-python -m pip install -r requirements.txt
-
-Here's a suggested README file for your project:
-
----
-
 # IMT Texas Hold'em Poker Game
 
 ## Description
@@ -23,7 +13,7 @@ This project is a Python-based implementation of the popular card game **Texas H
 
 ## Requirements
 - Python 3.8 or higher
-- Libraries: `random` (built-in), additional library `treys` (optional, for hand evaluation)
+- Libraries: `random` (built-in), `colorama`, `treys` (optional, for hand evaluation)
 
 ## Installation
 1. Clone this repository:
@@ -31,15 +21,15 @@ This project is a Python-based implementation of the popular card game **Texas H
    git clone https://github.com/yourusername/texas-holdem-poker.git
    cd texas-holdem-poker
    ```
-2. (Optional) Install the `treys` library for advanced hand evaluation:
+2. Install the required libraries:
    ```bash
-   pip install treys
+   python -m pip install -r requirements.txt
    ```
 
 ## Usage
 1. Run the game script:
    ```bash
-   python texas_holdem.py
+   python main.py
    ```
 2. Follow the on-screen prompts to play the game.
 
@@ -56,9 +46,11 @@ Texas-Holdem-Poker/
 ├── utils/
 │   ├── display.py
 │   ├── constants.py
-│
+│   ├── __init__.py
+├── tests/                 # Unit tests
 ├── README.md              # Project documentation
-└── requirements.txt       # List of dependencies
+├── requirements.txt       # List of dependencies
+└── game_log.log           # Game log file
 ```
 
 ## How to Play
@@ -77,6 +69,7 @@ Texas-Holdem-Poker/
 - Create a graphical user interface (GUI) for enhanced user experience.
 - Expand the betting system with more rules (e.g., blinds, ante).
 - Add multiplayer support over the network.
+- Add unitary tests
 
 ## Contributing
 Feel free to contribute to this project by submitting a pull request or reporting an issue.

@@ -1,6 +1,6 @@
 import random
 from models import Card
-from utils.display import display_card
+from utils import display_card
 
 class Table:
     """
@@ -13,6 +13,7 @@ class Table:
         self.common_cards = []
         self.blind = 0
         self.package = self.create_package()
+        self.current_bet = 0
 
     def create_package(self):
         """
@@ -103,7 +104,7 @@ class Table:
                     break
                 elif action == "bet":
                     try:
-                        bet_amount = int(input(f"Enter your bet amount (current chips: {player.chips}): "))
+                        bet_amount = int(input(f"Enter your bet amount (current chips: {player.chips} and current bet : {self.current_bet}): "))
                         player.bet(bet_amount, self)
                         break
                     except ValueError as e:
@@ -130,13 +131,13 @@ class Table:
         """
         active_players = [player for player in players if player.chips > 0]
         
-        # Si un seul joueur a des jetons, il gagne la partie
+            # If only one player has chips left, he is the winner
         if len(active_players) == 1:
             return active_players[0]
         
-        # Si tous les joueurs sont all-in, le jeu doit continuer jusqu'au showdown
+        # if all players are all-in, proceed to final evaluation
         if all(player.chips == 0 for player in players):
             print("All players are all-in. Proceeding to final evaluation.")
-            return None  # Pas encore de gagnant, évaluation finale nécessaire
+            return None  # no winner yet, proceed to final evaluation
         
         return None
